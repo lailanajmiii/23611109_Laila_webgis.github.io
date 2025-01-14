@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Helps the browser identify support for mobile applications -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Title on the browser tab -->
+    <title>WebGIS</title>
+    <!-- Leaflet CSS Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+    <!-- Leaflet JavaScript Library -->
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <!-- Style for the fullscreen map display -->
+    <style>
+      html,
+      body,
+      #map {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML Block to display the map -->
+    <div id="map"></div>
+
+    <script>
+      // Initialize the map
+      var map = L.map("map").setView([-6.2607, 106.781], 12); // Jakarta Selatan
+
+      // Define basemap layers
+      var basemap0 = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      });
+
+      var Esri_WorldImagery = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+        attribution: "Laila Najmi Rei &copy; &mdash; 23611109 Stistika Universitas Islam Indonesia",
+      });
+
+      var OpenTopoMap = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
+        maxZoom: 17,
+        attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a>',
+      });
+
+      // Add a default basemap to the map
+      Esri_WorldImagery.addTo(map);
+
+      // Control Layer for switching basemaps
+      var baseMaps = {
+        "Open Street Map": basemap0,
+        "Open Topo Map": OpenTopoMap,
+        "Esri World Imagery": Esri_WorldImagery,
+      };
+
+      var overlayMaps = {}; // Empty object for now, can add overlays later
+
+      var layerControl = L.control.layers(baseMaps, overlayMaps, { collapsed: false });
+      layerControl.addTo(map);
+
+      // Custom marker
+      var customIcon1 = L.icon({
+        iconUrl: "https://cdn.icon-icons.com/icons2/944/PNG/512/medical-39_icon-icons.com_73906.png",
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -40],
+      });
+      // Marker 1 udh
+      var marker1 = L.marker([-6.275727827393111, 106.77812266571736], { icon: customIcon1 });
+      marker1.bindPopup("RS Pondok Indah");
+      marker1.addTo(map);
+      marker1.bindTooltip("RS Pondok Indah <br> PQ8J+HJ Pd. Pinang, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 2 udh
+      var marker2 = L.marker([-6.29333166893676, 106.78610422168234], { icon: customIcon1 }); // you can change the coordinate
+      marker2.bindPopup("Mayapada Hospital Jakarta Selatan (MHJS)");
+      marker2.addTo(map);
+      marker2.openPopup();
+      marker2.bindTooltip("Mayapada Hospital Jakarta Selatan <br> PQ2P+Q8 Lb. Bulus, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 3
+      var marker3 = L.marker([-6.19575908375358, 106.83241975748105], { icon: customIcon1 });
+      marker3.bindPopup("Puskesmas Kecamatan Setiabudi");
+      marker3.addTo(map);
+      marker3.bindTooltip("Puskesmas Kecamatan Setiabudi <br> QRVM+6G Guntur, South Jakarta City, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 4 udh
+      var marker4 = L.marker([-6.226925, 106.802518], { icon: customIcon1 });
+      marker4.bindPopup("RS Pusat Pertamina");
+      marker4.addTo(map);
+      marker4.bindTooltip("RS Pusat Pertamina <br> QQ6V+27 Gunung, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 5 udh
+      var marker5 = L.marker([-6.265299, 106.7812], { icon: customIcon1 });
+      marker5.bindPopup("RS Fatmawati");
+      marker5.addTo(map);
+      marker5.bindTooltip("RS Fatmawati <br> PQ3W+WF Cilandak Bar., Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 6 udh
+      var marker6 = L.marker([-6.224578, 106.813937], { icon: customIcon1 });
+      marker6.bindPopup("RSUD Kebayoran Baru");
+      marker6.addTo(map);
+      marker6.bindTooltip("RSUD Kebayoran Baru <br> PQMX+QF Cipete Utara, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 7 udh
+      var marker7 = L.marker([-6.260711, 106.799867], { icon: customIcon1 });
+      marker7.bindPopup("RS Siloam Semanggi");
+      marker7.addTo(map);
+      marker7.bindTooltip("RS Siloam Semanggi <br> Semanggi, Jakarta Selatan");
+
+      // Marker 8 udh
+      var marker8 = L.marker([-6.240905, 106.804043], { icon: customIcon1 });
+      marker8.bindPopup("RSUP Fatmawati");
+      marker8.addTo(map);
+      marker8.bindTooltip("RSUP Fatmawati <br> QRJ8+9V Karet Semanggi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 9 udh
+      var marker9 = L.marker([-6.243148, 106.788314], { icon: customIcon1 });
+      marker9.bindPopup("RS Siloam TB Simatupang");
+      marker9.addTo(map);
+      marker9.bindTooltip("RS Siloam TB Simatupang <br> PQ5M+3Q Cilandak Bar., Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 10
+      var marker10 = L.marker([-6.236715577082482, 106.80289400260374], { icon: customIcon1 });
+      marker10.bindPopup("Puskesmas Kebayoran Baru");
+      marker10.addTo(map);
+      marker10.bindTooltip("Puskesmas Kebayoran Baru <br> QR34+36 Melawai, South Jakarta City, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 11 udh
+      var marker11 = L.marker([-6.2998, 106.7814], { icon: customIcon1 });
+      marker11.bindPopup("RS Asih");
+      marker11.addTo(map);
+      marker11.bindTooltip("RS Asih <br> QR22+RC Melawai, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 12 udh
+      var marker12 = L.marker([-6.292304, 106.779871], { icon: customIcon1 });
+      marker12.bindPopup("Puskesmas Pondok Pinang");
+      marker12.addTo(map);
+      marker12.bindTooltip("Puskesmas Pondok Pinang <br> PQFF+423, Jl. Ciputat Raya, RT.1/RW.8, Pd. Pinang, Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 13 udh
+      var marker13 = L.marker([-6.301727, 106.802567], { icon: customIcon1 });
+      marker13.bindPopup("Puskesmas Kebayoran Lama");
+      marker13.addTo(map);
+      marker13.bindTooltip("Puskesmas Kebayoran Lama <br> QQ2H+37 Kby. Lama Utara, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 14 udh
+      var marker14 = L.marker([-6.265233, 106.785118], { icon: customIcon1 });
+      marker14.bindPopup("RS Muhammadiyah Taman Puring");
+      marker14.addTo(map);
+      marker14.bindTooltip("RS Muhammadiyah Taman Puring <br> QQ5Q+82 Kramat Pela, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 15 udh
+      var marker15 = L.marker([-6.266765, 106.794396], { icon: customIcon1 });
+      marker15.bindPopup("RS Medistra");
+      marker15.addTo(map);
+      marker15.bindTooltip("RS Medistra <br> QR6M+4G Kuningan Tim., Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 16 udh
+      var marker16 = L.marker([-6.263411, 106.833518], { icon: customIcon1 });
+      marker16.bindPopup("RSUD Pasar Minggu");
+      marker16.addTo(map);
+      marker16.bindTooltip("RSUD Pasar Minggu <br> PR49+9W Ragunan, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 17 udh
+      var marker17 = L.marker([-6.266252, 106.805356], { icon: customIcon1 });
+      marker17.bindPopup("RS Mayapada Kuningan");
+      marker17.addTo(map);
+      marker17.bindTooltip("RS Mayapada Kuningan <br> QRJJ+GH Karet Kuningan, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 18
+      var marker18 = L.marker([-6.271526081848644, 106.79122102974527], { icon: customIcon1 });
+      marker18.bindPopup("Puskesmas Cilandak");
+      marker18.addTo(map);
+      marker18.bindTooltip("Puskesmas Cilandak <br> PQ7V+87 West Cilandak, South Jakarta City, Jakarta");
+
+      // Marker 19 udh
+      var marker19 = L.marker([-6.256568, 106.817435], { icon: customIcon1 });
+      marker19.bindPopup("RSUD Jati Padang");
+      marker19.addTo(map);
+      marker19.bindTooltip("RSUD Jati Padang <br> PR7R+QW Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 20 udh
+      var marker20 = L.marker([-6.240136, 106.801122], { icon: customIcon1 });
+      marker20.bindPopup("RS Bhayangkara");
+      marker20.addTo(map);
+      marker20.bindTooltip("RS Bhayangkara <br> PQ7C+8C Pd. Pinang, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 21 udh
+      var marker21 = L.marker([-6.238257, 106.812415], { icon: customIcon1 });
+      marker21.bindPopup("RS MMC");
+      marker21.addTo(map);
+      marker21.bindTooltip("RS MMC <br> QRJM+32 Karet Kuningan, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 22
+      var marker22 = L.marker([-6.327491035125337, 106.82418001193389], { icon: customIcon1 });
+      marker22.bindPopup("Puskesmas Kecamatan Jagakarsa");
+      marker22.addTo(map);
+      marker22.bindTooltip("Puskesmas Kecamatan Jagakarsa <br> Palmerah, MR79+82 Jagakarsa, South Jakarta City, Jakarta");
+
+      // Marker 23
+      var marker23 = L.marker([-6.287129, 106.813541], { icon: customIcon1 });
+      marker23.bindPopup("RS Tebet");
+      marker23.addTo(map);
+      marker23.bindTooltip("RS Tebet <br> QV42+X3 Tebet Bar., Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta");
+
+      // Marker 24
+      var marker24 = L.marker([-6.3109652727700185, 106.81175916043715], { icon: customIcon1 });
+      marker24.bindPopup("RSUD Jagaraksa");
+      marker24.addTo(map);
+      marker24.bindTooltip("RSUD Jagaraksa <br> MRM6+CH Jagakarsa, South Jakarta City, Jakarta");
+
+      // Marker 25
+      var marker25 = L.marker([-6.289326, 106.774634], { icon: customIcon1 });
+      marker25.bindPopup("Puskesmas Pasar Minggu");
+      marker25.addTo(map);
+      marker25.bindTooltip("Puskesmas Pasar Minggu <br> MRHG+M7 Kebagusan, South Jakarta City, Jakarta");
+
+      // Marker 26
+      var marker26 = L.marker([-6.278326, 106.784634], { icon: customIcon1 });
+      marker26.bindPopup("RS Gandaria");
+      marker26.addTo(map);
+      marker26.bindTooltip("RS Gandaria <br> QQ4R+97 Kramat Pela, South Jakarta City, Jakarta");
+
+      // Marker 27
+      var marker27 = L.marker([-6.243561, 106.805634], { icon: customIcon1 });
+      marker27.bindPopup("Puskemas Cipete Utara");
+      marker27.addTo(map);
+      marker27.bindTooltip("Puskemas Cipete Utara <br> PRQ5+72 North Cipete, South Jakarta City, Jakarta");
+
+      // Marker 28
+      var marker28 = L.marker([-6.205315883925795, 106.76032198394343], { icon: customIcon1 });
+      marker28.bindPopup("Puskesmas Pesanggrahan");
+      marker28.addTo(map);
+      marker28.bindTooltip("Puskesmas Pesanggrahan <br> QQG5+GX North Petukangan, South Jakarta City, Jakarta");
+
+      // Marker 29
+      var marker29 = L.marker([-6.22033336249783, 106.84615266672631], { icon: customIcon1 });
+      marker29.bindPopup("Puskesmas Tebet");
+      marker29.addTo(map);
+      marker29.bindTooltip("Puskesmas Tebet <br> QV82+WC West Tebet, South Jakarta City, Jakarta");
+
+      // Marker 30
+      var marker30 = L.marker([-6.235237071979771, 106.75332968852612], { icon: customIcon1 });
+      marker30.bindPopup("Puskesmas Kelurahan Petukangan Selatan");
+      marker30.addTo(map);
+      marker30.bindTooltip("Puskesmas Kelurahan Petukangan Selatan <br> QQ53+HM South Petukangan, South Jakarta City, Jakarta");
+    </script>
+       
+  </body>
+</html>
